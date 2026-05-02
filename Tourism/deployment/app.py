@@ -1,3 +1,4 @@
+%%writefile Tourism/deployment/app.py
 import streamlit as st
 import pandas as pd
 from huggingface_hub import hf_hub_download
@@ -23,6 +24,7 @@ MaritalStatus = st.selectbox("MaritalStatus", ["Single", "Unmarried", "Married",
 Designation = st.selectbox("Designation", ["Manager", "Executive", "Senior Manager", "VP", "AVP"])
 OwnCar = st.selectbox("OwnCar", ["Yes", "No"])
 Passport = st.selectbox("Passport", ["Yes", "No"])
+CityTier = st.selectbox("CityTier", ["1", "2", "3"])
 MonthlyIncome = st.number_input("MonthlyIncome")
 NumberOfChildrenVisiting = st.number_input("NumberOfChildrenVisiting", min_value=0, max_value=100, step=1)
 PitchSatisfactionScore = st.number_input("PitchSatisfactionScore")
@@ -33,16 +35,24 @@ NumberOfPersonVisiting = st.number_input("NumberOfPersonVisiting", min_value=0, 
 DurationOfPitch = st.number_input("DurationOfPitch")
 Age = st.number_input("Age", min_value=1, max_value=100, step=1)
 
+type_map = {"Company Invited": 0, "Self Enquiry": 1}
+occupation_map = {"Free Lancer": 0, "Large Business": 1, "Salaried": 2, "Small Business": 3}
+gender_map = {"Female": 0, "Male": 1}
+product_map = {"Basic": 0, "Deluxe": 1, "King": 2, "Standard": 3, "Super Deluxe": 4}
+marital_map = {"Divorced": 0, "Married": 1, "Single": 2, "Unmarried": 3}
+designation_map = {"AVP": 0, "Executive": 1, "Manager": 2, "Senior Manager": 3, "VP": 4}
+
 # Assemble input into DataFrame
 input_data = pd.DataFrame([{
-    'TypeofContact': TypeofContact,
-    'Occupation': Occupation,
-    'Gender': Gender,
-    'ProductPitched': ProductPitched,
-    'MaritalStatus': MaritalStatus,
-    'Designation': Designation,
-    'OwnCar': OwnCar,
-    'Passport': Passport,
+    'TypeofContact': type_map[TypeofContact],
+    'Occupation': occupation_map[Occupation],
+    'Gender': gender_map[Gender],
+    'ProductPitched': product_map[ProductPitched],
+    'MaritalStatus': marital_map[MaritalStatus],
+    'Designation': designation_map[Designation],
+    'OwnCar': 1 if OwnCar == "Yes" else 0,
+    'Passport': 1 if Passport == "Yes" else 0,
+    'CityTier': int(CityTier),
     'MonthlyIncome': MonthlyIncome,
     'NumberOfChildrenVisiting': NumberOfChildrenVisiting,
     'PitchSatisfactionScore': PitchSatisfactionScore,
