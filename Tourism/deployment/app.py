@@ -22,7 +22,7 @@ ProductPitched = st.selectbox("ProductPitched", ["Deluxe", "Basic","Standard","S
 MaritalStatus = st.selectbox("MaritalStatus", ["Single", "Unmarried", "Married", "Divorced"])
 Designation = st.selectbox("Designation", ["Manager", "Executive", "Senior Manager", "VP", "AVP"])
 OwnCar = st.selectbox("OwnCar", ["Yes", "No"])
-Passport = st.selectbox("OwnCar", ["Yes", "No"])
+Passport = st.selectbox("Passport", ["Yes", "No"])
 MonthlyIncome = st.number_input("MonthlyIncome")
 NumberOfChildrenVisiting = st.number_input("NumberOfChildrenVisiting", min_value=0, max_value=100, step=1)
 PitchSatisfactionScore = st.number_input("PitchSatisfactionScore")
