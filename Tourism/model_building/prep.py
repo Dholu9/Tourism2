@@ -11,6 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 from huggingface_hub import login, HfApi
 
 # Define constants for the dataset and output paths
+login(token=os.getenv("HF_TOKEN"))
 api = HfApi(token=os.getenv("HF_TOKEN"))
 DATASET_PATH = "hf://datasets/Amidho/Tourism/tourism.csv"
 df = pd.read_csv(DATASET_PATH)
