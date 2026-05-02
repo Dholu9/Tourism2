@@ -17,8 +17,10 @@ except RepositoryNotFoundError:
     create_repo(repo_id=repo_id, repo_type=repo_type, private=False)
     print(f"Space '{repo_id}' created.")
 
-api.upload_folder(
-    folder_path="Tourism",
-    repo_id=repo_id,
-    repo_type=repo_type,
+api = HfApi()
+api.create_repo(
+    repo_id="Amidho/Tourism",
+    repo_type="dataset",
+    exist_ok=True, 
+    token=os.environ["HF_TOKEN"]
 )
